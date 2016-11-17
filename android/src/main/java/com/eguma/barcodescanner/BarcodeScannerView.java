@@ -1,7 +1,6 @@
 package com.eguma.barcodescanner;
 
 import android.content.Context;
-import android.content.res.Configuration;
 import android.graphics.Color;
 import android.hardware.Camera;
 import android.util.Log;
@@ -35,13 +34,11 @@ public class BarcodeScannerView extends FrameLayout implements Camera.PreviewCal
     }
 
     public void onResume() {
-        mPreview.startCamera(); // workaround for reload js
-        // mPreview.onResume();
+        mPreview.onResume();
     }
 
     public void onPause() {
-        mPreview.stopCamera();  // workaround for reload js
-        // mPreview.onPause();
+        mPreview.onPause();
     }
 
     public void setCameraType(String cameraType) {
@@ -50,6 +47,10 @@ public class BarcodeScannerView extends FrameLayout implements Camera.PreviewCal
 
     public void setFlash(boolean flag) {
         mPreview.setFlash(flag);
+    }
+
+    public void setFocus(boolean flag) {
+        mPreview.setAutoFocus(flag);
     }
 
     public void stopCamera() {
@@ -63,19 +64,6 @@ public class BarcodeScannerView extends FrameLayout implements Camera.PreviewCal
             Camera.Size size = parameters.getPreviewSize();
             int width = size.width;
             int height = size.height;
-
-            if (DisplayUtils.getScreenOrientation(getContext()) == Configuration.ORIENTATION_PORTRAIT) {
-                byte[] rotatedData = new byte[data.length];
-                for (int y = 0; y < height; y++) {
-                    for (int x = 0; x < width; x++)
-                        rotatedData[x * height + height - y - 1] = data[x + y * width];
-                }
-
-                int tmp = width;
-                width = height;
-                height = tmp;
-                data = rotatedData;
-            }
 
             Result rawResult = null;
             PlanarYUVLuminanceSource source = new PlanarYUVLuminanceSource(data, width, height, 0, 0, width, height, false);

@@ -1,9 +1,7 @@
 'use strict';
 
-import React, {
-  Component,
-  PropTypes,
-} from 'react';
+import React from 'react';
+import { Component, PropTypes} from 'react';
 import {
   requireNativeComponent,
   StyleSheet,
@@ -15,7 +13,6 @@ import Viewfinder from './Viewfinder';
 class BarcodeScannerView extends Component {
   constructor(props) {
     super(props);
-
     this.onChange = this.onChange.bind(this);
   }
 
@@ -60,13 +57,12 @@ BarcodeScannerView.propTypes = {
   showLoadingIndicator: PropTypes.bool,
   showViewFinder: PropTypes.bool,
   torchMode: PropTypes.string,
+  autoFocus: PropTypes.string,
   viewFinderBackgroundColor: PropTypes.string,
   viewFinderBorderColor: PropTypes.string,
   viewFinderBorderWidth: PropTypes.number,
   viewFinderBorderLength: PropTypes.number,
   viewFinderShowLoadingIndicator: PropTypes.bool,
-  viewFinderHeight: PropTypes.number,
-  viewFinderWidth: PropTypes.number,
 };
 
 BarcodeScannerView.defaultProps = {

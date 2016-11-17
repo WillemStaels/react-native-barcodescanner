@@ -181,18 +181,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     }
 
     @Override
-    public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
-        if(holder.getSurface() == null) {
-            return;
-        }
-        if(mCamera != null) {
-            try {
-                mCamera.setDisplayOrientation(getDisplayOrientation());
-            } catch (Exception e) {
-                Log.e(TAG, e.toString(), e);
-            }
-        }
-    }
+    public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) { }
 
     public void onPause() {
         stopCameraPreview();
